@@ -20,6 +20,8 @@
       <Filter>platform</Filter>
     </ClInclude>
     <ClInclude Include="src\textfieldWindow.h" />
+    <ClInclude Include="src\tinyxml2.h" />
+    <ClInclude Include="src\BookLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Source.cpp" />
@@ -33,5 +35,6 @@
     <ClCompile Include="src\platform\imgui_impl_opengl3.cpp">
       <Filter>platform</Filter>
     </ClCompile>
+    <ClCompile Include="src\tinyxml2.cpp" />
   </ItemGroup>
 </Project>

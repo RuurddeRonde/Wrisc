@@ -6,11 +6,11 @@
 
 struct bookSettings
 {
-	std::string savelocation;
 	std::string Alineafont;
-	std::string h1Alineafont;
-	std::string h2Alineafont;
-	std::string h3Alineafont;
+	std::string h1font;
+	std::string h2font;
+	std::string h3font;
+	std::string path;
 	int AlineaFontSize;
 	int h1fontsize;
 	int h2fontsize;
@@ -20,28 +20,40 @@ struct bookSettings
 class Chapter
 {
 public:
-	Chapter();
-	~Chapter();
-
+	Chapter() 
+	{
+		h1 = "testh1";
+		h2 = "testh2";
+		h3 = "testh3";
+		text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+	}
+	~Chapter() {}
+	std::string h1;
+	std::string h2;
+	std::string h3;
+	std::string text;
 private:
-
 };
 
 
 class Book
 {
 public:
-	Book(std::string name, std::string savePath, int alsize = 11, int h1s = 24, int h2s = 18, int h3s = 14)
+	Book(std::string name = "newBook",  int alsize = 11, int h1s = 24, int h2s = 18, int h3s = 14)
 	{
 		settings.AlineaFontSize = alsize;
-		settings.h1Alineafont = h1s;
-		settings.h2Alineafont = h2s;
-		settings.h3Alineafont = h3s;
-		settings.savelocation = savePath;
+		settings.h1fontsize = h1s;
+		settings.h2fontsize = h2s;
+		settings.h3fontsize = h3s;
+		settings.path = name + ".xml";
+		settings.Alineafont = "arial";
+		settings.h1font = "arial";
+		settings.h2font = "arial";
+		settings.h3font = "arial";
+		newChapter();
 	}
 	~Book()
 	{
-
 		chapters.clear();
 	}
 	void newChapter()
@@ -49,7 +61,7 @@ public:
 		chapters.push_back(Chapter());
 	}
 
-private:
 	bookSettings settings;
 	std::vector<Chapter> chapters;
+private:
 };

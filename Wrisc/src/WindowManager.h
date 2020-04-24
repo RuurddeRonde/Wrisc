@@ -2,7 +2,6 @@
 #include "UIWindow.h"
 #include <vector>
 #include "Window.h"
-#include "Book.h"
 
 namespace UI
 {
@@ -20,7 +19,6 @@ namespace UI
 
 		void setstyle();
 		void showDockSpace(bool* p_open);
-		Book book;
 	};
 }
 

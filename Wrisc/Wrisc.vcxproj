@@ -95,6 +95,7 @@
   <ItemGroup>
     <ClInclude Include="src\AppManager.h" />
     <ClInclude Include="src\Book.h" />
+    <ClInclude Include="src\BookLoader.h" />
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\TextEditor.h" />
     <ClInclude Include="src\UIWindow.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="src\platform\imgui_impl_glfw.h" />
     <ClInclude Include="src\platform\imgui_impl_opengl3.h" />
     <ClInclude Include="src\textfieldWindow.h" />
+    <ClInclude Include="src\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Source.cpp" />
@@ -112,6 +114,7 @@
     <ClCompile Include="src\WindowManager.cpp" />
     <ClCompile Include="src\platform\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\platform\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
