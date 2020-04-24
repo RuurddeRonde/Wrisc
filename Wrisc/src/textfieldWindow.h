@@ -6,8 +6,6 @@
 #include<string>
 namespace UI
 {
-#define MEM_SIZE_16MB   ( 16 * 1024 * 1024 )
-
 	
 	class TextFieldWindow : public UIWindow
 	{
@@ -15,6 +13,7 @@ namespace UI
 		TextFieldWindow(std::string name): name {name}
 		{
 			t.SetText(AppManager::getInstance().book.chapters[AppManager::getInstance().book.chapterindex].text.c_str());
+			previndex = AppManager::getInstance().book.chapterindex;
 		}
 		~TextFieldWindow()
 		{
@@ -25,8 +24,16 @@ namespace UI
 			{
 				if (ImGui::Begin(name.c_str(), &showing))
 				{
-					
+					if (AppManager::getInstance().book.chapterindex != previndex)
+					{
+						t.SetText(AppManager::getInstance().book.chapters[AppManager::getInstance().book.chapterindex].text.c_str());
+						previndex = AppManager::getInstance().book.chapterindex;
+					}
 					t.Render("chapter");
+					if (t.IsTextChanged())
+					{
+						AppManager::getInstance().book.chapters[AppManager::getInstance().book.chapterindex].text = t.GetText();
+					}
 				}
 				ImGui::End();
 
@@ -35,5 +42,6 @@ namespace UI
 	private:
 		std::string name;
 		TextEditor t;
+		int previndex;
 	};
 }

@@ -27,6 +27,11 @@ namespace UI
 						//if (ImGui::TreeNode("%s###%u", AppManager::getInstance().book.chapters[i].h1.c_str(), i))
 						if (ImGui::TreeNode((void*)(intptr_t)i, AppManager::getInstance().book.chapters[i].h1.c_str()))
 						{
+							ImGui::SameLine();
+							if (ImGui::Button("Edit"))
+							{
+								AppManager::getInstance().book.chapterindex = i;
+							}
 							static char titleBuf[128];
 							ImGui::Text("Set new title:");
 							//ImGui::SameLine();
@@ -50,7 +55,19 @@ namespace UI
 									AppManager::getInstance().book.chapters[i].h1 = undertitleBuf;
 								}
 							}
+							if (ImGui::Button("Edit"))
+							{
+								AppManager::getInstance().book.chapterindex = i;
+							}
 							ImGui::TreePop();
+						}
+						else
+						{
+							ImGui::SameLine();
+							if (ImGui::Button("Edit"))
+							{
+								AppManager::getInstance().book.chapterindex = i;
+							}
 						}
 					}
 

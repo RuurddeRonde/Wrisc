@@ -1,8 +1,9 @@
 #pragma once
 #include "UIWindow.h"
 #include "imgui.h"
-#include "TextEditor.h"
 #include<string>
+#include "BookLoader.h"
+#include "AppManager.h"
 
 namespace UI
 {
@@ -21,7 +22,10 @@ namespace UI
             {
                 if (ImGui::BeginMenu("File"))
                 {
-                    if (ImGui::MenuItem("Save", "CTRL+S")) {}
+                    if (ImGui::MenuItem("Save", "CTRL+S")) 
+                    {
+                        BookLoader::SaveBook(&AppManager::getInstance().book);
+                    }
                     if (ImGui::MenuItem("Open", "CTRL+O")) {}  // Disabled item
                     ImGui::Separator();
                     if (ImGui::MenuItem("New", "CTRL+N")) {}
