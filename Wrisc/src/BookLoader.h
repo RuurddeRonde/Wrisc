@@ -36,9 +36,6 @@ public:
 		Element->SetText(book->settings.h2fontsize);
 		root->InsertEndChild(Element);
 
-		Element = doc.NewElement("h3FontSize");
-		Element->SetText(book->settings.h3fontsize);
-		root->InsertEndChild(Element);
 
 		//fonts
 		Element = doc.NewElement("AlineaFont");
@@ -53,9 +50,6 @@ public:
 		Element->SetText(book->settings.h2font.c_str());
 		root->InsertEndChild(Element);
 
-		Element = doc.NewElement("h3Font");
-		Element->SetText(book->settings.h3font.c_str());
-		root->InsertEndChild(Element);
 
 		for (auto i = 0; i < book->chapters.size(); i++)
 		{
@@ -67,9 +61,6 @@ public:
 			celem->InsertEndChild(Element);
 			Element = doc.NewElement("h2");
 			Element->SetText(book->chapters[i].h2.c_str());
-			celem->InsertEndChild(Element);
-			Element = doc.NewElement("h3");
-			Element->SetText(book->chapters[i].h3.c_str());
 			celem->InsertEndChild(Element);
 			Element = doc.NewElement("text");
 			Element->SetText(book->chapters[i].text.c_str());

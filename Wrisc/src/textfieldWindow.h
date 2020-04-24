@@ -2,6 +2,7 @@
 #include "UIWindow.h"
 #include "imgui.h"
 #include "TextEditor.h"
+#include "AppManager.h"
 #include<string>
 namespace UI
 {
@@ -13,6 +14,7 @@ namespace UI
 	public:
 		TextFieldWindow(std::string name): name {name}
 		{
+			t.SetText(AppManager::getInstance().book.chapters[AppManager::getInstance().book.chapterindex].text.c_str());
 		}
 		~TextFieldWindow()
 		{
@@ -24,7 +26,7 @@ namespace UI
 				if (ImGui::Begin(name.c_str(), &showing))
 				{
 					
-					t.Render("t");
+					t.Render("chapter");
 				}
 				ImGui::End();
 
@@ -32,7 +34,6 @@ namespace UI
 		}
 	private:
 		std::string name;
-		char buffer[16 * 1024];
 		TextEditor t;
 	};
 }

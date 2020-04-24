@@ -8,11 +8,13 @@
   <ItemGroup>
     <ClInclude Include="src\AppManager.h" />
     <ClInclude Include="src\Book.h" />
+    <ClInclude Include="src\BookLoader.h" />
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\TextEditor.h" />
     <ClInclude Include="src\UIWindow.h" />
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\WindowManager.h" />
+    <ClInclude Include="src\chapterListMenu.h" />
     <ClInclude Include="src\platform\imgui_impl_glfw.h">
       <Filter>platform</Filter>
     </ClInclude>
@@ -21,7 +23,6 @@
     </ClInclude>
     <ClInclude Include="src\textfieldWindow.h" />
     <ClInclude Include="src\tinyxml2.h" />
-    <ClInclude Include="src\BookLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Source.cpp" />

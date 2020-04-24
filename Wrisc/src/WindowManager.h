@@ -13,6 +13,7 @@ namespace UI
 		void Update();
 		void Render();
 		void AddWindow(std::unique_ptr<UIWindow> newWindow);
+		bool shouldClose() { return mainWindow.WindowShouldClose(); }
 	private:
 		std::vector<std::unique_ptr<UIWindow>> windows;
 		Window mainWindow;

@@ -2,18 +2,21 @@
 #include "textfieldWindow.h"
 #include "MainMenu.h"
 #include "BookLoader.h"
+#include "AppManager.h"
+#include "chapterListMenu.h"
 int main()
 {
-	BookLoader::SaveBook(new Book());
 
 	UI::WindowManager ui;
 
 	ui.AddWindow(std::unique_ptr<UI::TextFieldWindow>(new UI::TextFieldWindow("textView")));
 	ui.AddWindow(std::unique_ptr<UI::MainMenu>(new UI::MainMenu()));
-	while (true)
+	ui.AddWindow(std::unique_ptr<UI::ChapterList>(new UI::ChapterList("chapters")));
+	while (!ui.shouldClose())
 	{
 		ui.Update();
 		ui.Render();
 	}
+	BookLoader::SaveBook(&AppManager::getInstance().book);
 	return 0;
 }
