@@ -11,6 +11,87 @@ class BookLoader
 public:
 	static Book LoadBook(std::string path)
 	{
+		tinyxml2::XMLDocument xmlDoc;
+		tinyxml2::XMLError eResult = xmlDoc.LoadFile(path.c_str());
+		//XMLCheckResult(eResult);
+		tinyxml2::XMLNode * pRoot = xmlDoc.FirstChild();
+		if (pRoot == nullptr)
+		{
+			//error
+		}
+
+		const char * temp = nullptr;
+		tinyxml2::XMLElement * pElement = pRoot->FirstChildElement("path");
+		temp = pElement->FirstChild()->Value();
+		if (temp == nullptr)
+		{
+			//error
+		}
+		std::string sPath = temp;
+
+		pElement = pRoot->FirstChildElement("AlineaFont");
+		temp = pElement->FirstChild()->Value();
+		if (temp == nullptr)
+		{
+			//error
+		}
+		std::string sAlFont = temp;
+
+		pElement = pRoot->FirstChildElement("h1Font");
+		temp = pElement->FirstChild()->Value();
+		if (temp == nullptr)
+		{
+			//error
+		}
+		std::string sh1Font = temp;
+
+		pElement = pRoot->FirstChildElement("h2Font");
+		temp = pElement->FirstChild()->Value();
+		if (temp == nullptr)
+		{
+			//error
+		}
+		std::string sh2Font = temp;
+
+		int tempInt;
+		pElement = pRoot->FirstChildElement("AlineaFontSize");
+		tempInt = pElement->IntText();
+		if (tempInt == 0)
+		{
+			tempInt = 11;
+		}
+		int alineaFontSize = tempInt;
+
+		pElement = pRoot->FirstChildElement("h1FontSize");
+		tempInt = pElement->IntText();
+		if (tempInt == 0)
+		{
+			tempInt = 11;
+		}
+		int h1FontSize = tempInt;
+
+		pElement = pRoot->FirstChildElement("h2FontSize");
+		tempInt = pElement->IntText();
+		if (tempInt == 0)
+		{
+			tempInt = 11;
+		}
+		int h2FontSize = tempInt;
+
+		Book b(path, alineaFontSize, h1FontSize, h2FontSize);
+
+		//loop chapters
+
+		pElement = pRoot->FirstChildElement("chapter");
+		while (pElement != nullptr)
+		{
+			std::string temph1 = pElement->FirstChildElement("h1")->FirstChild()->Value();
+			std::string temph2 = pElement->FirstChildElement("h2")->FirstChild()->Value();
+			std::string temptext = pElement->FirstChildElement("text")->FirstChild()->Value();
+			b.newChapter(temph1, temph2, temptext);
+			pElement = pElement->NextSiblingElement("chapter");
+		}
+		return b;
 	}
 	static bool SaveBook(Book* book)
 	{

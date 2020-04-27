@@ -6,7 +6,7 @@
 #include "chapterListMenu.h"
 int main()
 {
-
+	AppManager::getInstance().book = BookLoader::LoadBook("SavedData.book");
 	UI::WindowManager ui;
 
 	ui.AddWindow(std::unique_ptr<UI::TextFieldWindow>(new UI::TextFieldWindow("textView")));
