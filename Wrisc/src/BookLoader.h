@@ -11,110 +11,133 @@ class BookLoader
 public:
 	static Book LoadBook(std::string path)
 	{
-		tinyxml2::XMLDocument xmlDoc;
-		tinyxml2::XMLError eResult = xmlDoc.LoadFile(path.c_str());
-		//XMLCheckResult(eResult);
-		tinyxml2::XMLNode * pRoot = xmlDoc.FirstChild();
-		if (pRoot == nullptr)
+		try
 		{
-			//error
-		}
+			tinyxml2::XMLDocument xmlDoc;
+			tinyxml2::XMLError eResult = xmlDoc.LoadFile(path.c_str());
+			//XMLCheckResult(eResult);
+			tinyxml2::XMLNode* pRoot = xmlDoc.FirstChild();
+			if (pRoot == nullptr)
+			{
+				return Book();
+			}
 
-		const char * temp = nullptr;
-		tinyxml2::XMLElement * pElement = pRoot->FirstChildElement("path");
-		temp = pElement->FirstChild()->Value();
-		if (temp == nullptr)
-		{
-			//error
-		}
-		std::string sPath = temp;
+			const char* temp = nullptr;
+			tinyxml2::XMLElement* pElement = pRoot->FirstChildElement("path");
+			temp = pElement->FirstChild()->Value();
+			if (temp == nullptr)
+			{
+				return Book();
+			}
+			std::string sPath = temp;
 
-		pElement = pRoot->FirstChildElement("AlineaFont");
-		temp = pElement->FirstChild()->Value();
-		if (temp == nullptr)
-		{
-			//error
-		}
-		std::string sAlFont = temp;
+			pElement = pRoot->FirstChildElement("AlineaFont");
+			temp = pElement->FirstChild()->Value();
+			if (temp == nullptr)
+			{
+				return Book();
+			}
+			std::string sAlFont = temp;
 
-		pElement = pRoot->FirstChildElement("h1Font");
-		temp = pElement->FirstChild()->Value();
-		if (temp == nullptr)
-		{
-			//error
-		}
-		std::string sh1Font = temp;
+			pElement = pRoot->FirstChildElement("h1Font");
+			temp = pElement->FirstChild()->Value();
+			if (temp == nullptr)
+			{
+				return Book();
+			}
+			std::string sh1Font = temp;
 
-		pElement = pRoot->FirstChildElement("h2Font");
-		temp = pElement->FirstChild()->Value();
-		if (temp == nullptr)
-		{
-			//error
-		}
-		std::string sh2Font = temp;
+			pElement = pRoot->FirstChildElement("h2Font");
+			temp = pElement->FirstChild()->Value();
+			if (temp == nullptr)
+			{
+				return Book();
+			}
+			std::string sh2Font = temp;
 
-		int tempInt;
-		pElement = pRoot->FirstChildElement("AlineaFontSize");
-		tempInt = pElement->IntText();
-		if (tempInt == 0)
-		{
-			tempInt = 11;
-		}
-		int alineaFontSize = tempInt;
+			int tempInt;
+			pElement = pRoot->FirstChildElement("AlineaFontSize");
+			tempInt = pElement->IntText();
+			if (tempInt == 0)
+			{
+				tempInt = 11;
+			}
+			int alineaFontSize = tempInt;
 
-		pElement = pRoot->FirstChildElement("h1FontSize");
-		tempInt = pElement->IntText();
-		if (tempInt == 0)
-		{
-			tempInt = 11;
-		}
-		int h1FontSize = tempInt;
+			pElement = pRoot->FirstChildElement("h1FontSize");
+			tempInt = pElement->IntText();
+			if (tempInt == 0)
+			{
+				tempInt = 11;
+			}
+			int h1FontSize = tempInt;
 
-		pElement = pRoot->FirstChildElement("h2FontSize");
-		tempInt = pElement->IntText();
-		if (tempInt == 0)
-		{
-			tempInt = 11;
-		}
-		int h2FontSize = tempInt;
+			pElement = pRoot->FirstChildElement("h2FontSize");
+			tempInt = pElement->IntText();
+			if (tempInt == 0)
+			{
+				tempInt = 11;
+			}
+			int h2FontSize = tempInt;
 
-		Book b(path, alineaFontSize, h1FontSize, h2FontSize);
+			Book b(path, alineaFontSize, h1FontSize, h2FontSize);
 
-		pElement = pRoot->FirstChildElement("title");
-		temp = pElement->FirstChild()->Value();
-		if (temp == nullptr)
-		{
-			//error
-		}
-		b.title= temp;
+			pElement = pRoot->FirstChildElement("title");
+			if (pElement != nullptr)
+			{
+				if (pElement->FirstChild() != NULL)
+				{
+					temp = pElement->FirstChild()->Value();
+					if (temp != nullptr)
+					{
+						b.title = temp;
+					}
+				}
+			}
 
-		pElement = pRoot->FirstChildElement("autor");
-		temp = pElement->FirstChild()->Value();
-		if (temp == nullptr)
-		{
-			//error
-		}
-		b.author = temp;
-		pElement = pRoot->FirstChildElement("publisher");
-		temp = pElement->FirstChild()->Value();
-		if (temp == nullptr)
-		{
-			//error
-		}
-		b.publisher = temp;
-		//loop chapters
+			pElement = pRoot->FirstChildElement("autor");
+			if (pElement != nullptr)
+			{
+				if (pElement->FirstChild() != NULL)
+				{
+					temp = pElement->FirstChild()->Value();
+					if (temp != nullptr)
+					{
+						b.author = temp;
+					}
+				}
+			}
+			pElement = pRoot->FirstChildElement("publisher");
+			if (pElement != nullptr)
+			{
+				if (pElement->FirstChild() != NULL)
+				{
+					temp = pElement->FirstChild()->Value();
+					if (temp != nullptr)
+					{
+						b.publisher = temp;
+					}
+				}
+			}
+			//loop chapters
 
-		pElement = pRoot->FirstChildElement("chapter");
-		while (pElement != nullptr)
-		{
-			std::string temph1 = pElement->FirstChildElement("h1")->FirstChild()->Value();
-			std::string temph2 = pElement->FirstChildElement("h2")->FirstChild()->Value();
-			std::string temptext = pElement->FirstChildElement("text")->FirstChild()->Value();
-			b.newChapter(temph1, temph2, temptext);
-			pElement = pElement->NextSiblingElement("chapter");
+			pElement = pRoot->FirstChildElement("chapter");
+			while (pElement != nullptr)
+			{
+				std::string temph1 = pElement->FirstChildElement("h1")->FirstChild()->Value();
+				std::string temph2 = pElement->FirstChildElement("h2")->FirstChild()->Value();
+				std::string temptext = pElement->FirstChildElement("text")->FirstChild()->Value();
+				b.newChapter(temph1, temph2, temptext);
+				pElement = pElement->NextSiblingElement("chapter");
+			}
+			return b;
 		}
-		return b;
+		catch (const std::exception&)
+		{
+			return Book();
+		}
 	}
+
 	static bool SaveBook(Book* book)
 	{
 		tinyxml2::XMLDocument doc;
@@ -187,14 +210,3 @@ public:
 	}
 private:
 };
-
-/*
-TiXmlDocument doc;
-	TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "", "" );
-	TiXmlElement * element = new TiXmlElement( "Hello" );
-	TiXmlText * text = new TiXmlText( "World" );
-	element->LinkEndChild( text );
-	doc.LinkEndChild( decl );
-	doc.LinkEndChild( element );
-	doc.SaveFile( "madeByHand.xml" );
-*/

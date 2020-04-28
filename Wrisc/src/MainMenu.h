@@ -5,15 +5,17 @@
 #include "BookLoader.h"
 #include "AppManager.h"
 #include "bookSettings.h"
+#include "Export.h"
 
 namespace UI
 {
 	class MainMenu : public UIWindow
 	{
 	public:
-		MainMenu():booksettingswindow{"Book settings"}
+		MainMenu():booksettingswindow{"Book settings"}, exportwindow{"Export"}
 		{
 			booksettingswindow.Hide();
+			exportwindow.Hide();
 		}
 		~MainMenu()
 		{
@@ -21,6 +23,7 @@ namespace UI
 		virtual void update() override
 		{
 			booksettingswindow.update();
+			exportwindow.update();
             if (ImGui::BeginMainMenuBar())
             {
                 if (ImGui::BeginMenu("File"))
@@ -44,7 +47,14 @@ namespace UI
 					{
 						booksettingswindow.Show();
 					}
-					
+					ImGui::EndMenu();
+				}
+				if (ImGui::BeginMenu("Export"))
+				{
+					if (ImGui::MenuItem("settings"))
+					{
+						exportwindow.Show();
+					}
 					ImGui::EndMenu();
 				}
                
@@ -53,5 +63,6 @@ namespace UI
 		}
 	private:
 		Booksettings booksettingswindow;
+		ExportsettingsWindow exportwindow;
 	};
 }

@@ -9,6 +9,7 @@
     <ClInclude Include="src\AppManager.h" />
     <ClInclude Include="src\Book.h" />
     <ClInclude Include="src\BookLoader.h" />
+    <ClInclude Include="src\Export.h" />
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\TextEditor.h" />
     <ClInclude Include="src\UIWindow.h" />
