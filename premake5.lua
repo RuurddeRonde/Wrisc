@@ -11,13 +11,15 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Wrisc/vendor/GLFW/include"
-IncludeDir["GLAD"] = "OSAS/vendor/GLAD"
+IncludeDir["GLAD"] = "Wrisc/vendor/GLAD"
 IncludeDir["ImGui"] = "Wrisc/vendor/imgui"
+IncludeDir["DuckX"] = "Wrisc/vendor/DuckX-master"
 
 group "Dependencies"
 	include "Wrisc/vendor/GLFW"
 	include "Wrisc/vendor/GLAD"
 	include "Wrisc/vendor/imgui"
+	include "Wrisc/vendor/DuckX-master"
 
 project "Wrisc"
 	location "Wrisc"
@@ -39,9 +41,11 @@ project "Wrisc"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.DuckX}",
 	}
 	links 
 	{ 
+		"DuckX",
 		"GLFW",
 		"GLAD",
 		"ImGui",

@@ -21,7 +21,8 @@ namespace UI
 		{
 			if (showing)
 			{
-				if (ImGui::Begin(name.c_str(), &showing))
+				
+				if (ImGui::Begin(name.c_str(), NULL, ImGuiWindowFlags_NoCollapse))
 				{
 					for (auto i = 0; i < AppManager::getInstance().book.chapters.size(); i++)
 					{

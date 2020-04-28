@@ -59,7 +59,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WRISC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\src;vendor\GLFW\include;..\OSAS\vendor\GLAD;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\src;vendor\GLFW\include;vendor\GLAD;vendor\imgui;vendor\DuckX-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -76,7 +76,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WRISC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\src;vendor\GLFW\include;..\OSAS\vendor\GLAD;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\src;vendor\GLFW\include;vendor\GLAD;vendor\imgui;vendor\DuckX-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -98,6 +98,7 @@
     <ClInclude Include="src\BookLoader.h" />
     <ClInclude Include="src\Export.h" />
     <ClInclude Include="src\MainMenu.h" />
+    <ClInclude Include="src\MessageBox.h" />
     <ClInclude Include="src\TextEditor.h" />
     <ClInclude Include="src\UIWindow.h" />
     <ClInclude Include="src\Window.h" />
@@ -120,6 +121,9 @@
     <ClCompile Include="src\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="vendor\DuckX-master\DuckX.vcxproj">
+      <Project>{045E0F0D-7072-37BE-39F4-DA1DA5C733EF}</Project>
+    </ProjectReference>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
       <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
     </ProjectReference>

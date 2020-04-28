@@ -11,6 +11,7 @@
     <ClInclude Include="src\BookLoader.h" />
     <ClInclude Include="src\Export.h" />
     <ClInclude Include="src\MainMenu.h" />
+    <ClInclude Include="src\MessageBox.h" />
     <ClInclude Include="src\TextEditor.h" />
     <ClInclude Include="src\UIWindow.h" />
     <ClInclude Include="src\Window.h" />

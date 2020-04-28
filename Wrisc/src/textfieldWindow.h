@@ -22,7 +22,7 @@ namespace UI
 		{
 			if (showing)
 			{
-				if (ImGui::Begin(name.c_str(), &showing))
+				if (ImGui::Begin(name.c_str(), NULL))
 				{
 					if (AppManager::getInstance().book.chapterindex != previndex)
 					{

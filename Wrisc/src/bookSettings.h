@@ -10,6 +10,7 @@ namespace UI
 	public:
 		Booksettings(std::string name) : name{ name }
 		{
+			
 		}
 		~Booksettings()
 		{

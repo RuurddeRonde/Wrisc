@@ -21,6 +21,7 @@ namespace UI
 			return;
 		}
 		glfwMakeContextCurrent(window);
+		glfwMaximizeWindow(window);
 		//glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
