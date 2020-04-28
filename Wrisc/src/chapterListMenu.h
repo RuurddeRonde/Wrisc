@@ -12,6 +12,7 @@ namespace UI
 	public:
 		ChapterList(std::string name) : name{ name }
 		{
+			popupshow = false;
 		}
 		~ChapterList()
 		{
@@ -24,49 +25,25 @@ namespace UI
 				{
 					for (auto i = 0; i < AppManager::getInstance().book.chapters.size(); i++)
 					{
-						//if (ImGui::TreeNode("%s###%u", AppManager::getInstance().book.chapters[i].h1.c_str(), i))
 						if (ImGui::TreeNode((void*)(intptr_t)i, AppManager::getInstance().book.chapters[i].h1.c_str()))
 						{
 							//ImGui::SameLine();
-							if (ImGui::Button("Edit"))
+							if (ImGui::Button("Edit text"))
 							{
 								AppManager::getInstance().book.chapterindex = i;
 							}
-
-							static char titleBuf[128];
-							ImGui::Text("Set new title:");
-							//ImGui::SameLine();
-							ImGui::InputText("###1", titleBuf, sizeof(titleBuf));
-							if (ImGui::Button("Apply"))
+							if (ImGui::Button("Edit titels"))
 							{
-								if (titleBuf[0] != ' ')
-								{
-									AppManager::getInstance().book.chapters[i].h1 = titleBuf;
-								}
+								popupshow = true;
+								popupeditID = i;
 							}
 
-							static char undertitleBuf[128];
-							ImGui::Text(AppManager::getInstance().book.chapters[i].h2.c_str());
-							ImGui::Text("Set new Subtitle:");
-							//ImGui::SameLine();
-							ImGui::InputText("###%d", undertitleBuf, sizeof(undertitleBuf),i);
-							if (ImGui::Button("Apply"))
-							{
-								if (undertitleBuf[0] != ' ')
-								{
-									AppManager::getInstance().book.chapters[i].h1 = undertitleBuf;
-								}
-							}
 							ImGui::TreePop();
 						}
-						else
-						{
-						//	ImGui::SameLine();
-//							if (ImGui::Button("Edit###editbtn"))
-	//						{
-		//						AppManager::getInstance().book.chapterindex = i;
-			//				}
-						}
+					}
+					if (popupshow)
+					{
+						showPopUp(popupeditID);
 					}
 
 					ImGui::Spacing();
@@ -80,5 +57,51 @@ namespace UI
 		}
 	private:
 		std::string name;
+		bool popupshow;
+		int popupeditID;
+		void showPopUp(int chapterID)
+		{
+			//ImGui::SetNextWindowPos(ImVec2((ImGui::GetWindowWidth() / 2), ImGui::GetWindowHeight() / 2));
+			if (ImGui::Begin("Edit chapter", &showing))
+			{
+				ImGui::Text(AppManager::getInstance().book.chapters[chapterID].h1.c_str());
+				ImGui::Text(AppManager::getInstance().book.chapters[chapterID].h2.c_str());
+				ImGui::Spacing();
+				ImGui::Spacing();
+
+				static char titleBuf[128];
+				ImGui::Text("Set new title:");
+				//ImGui::SameLine();
+				ImGui::InputText("###h1", titleBuf, sizeof(titleBuf));
+				if (ImGui::Button("Apply"))
+				{
+					if (titleBuf[0] != ' '&& titleBuf[0] != '\0')
+					{
+						AppManager::getInstance().book.chapters[chapterID].h1 = titleBuf;
+					}
+				}
+				ImGui::Spacing();
+
+				static char undertitleBuf[128];
+				ImGui::Text(AppManager::getInstance().book.chapters[chapterID].h2.c_str());
+				ImGui::Text("Set new Subtitle:");
+				//ImGui::SameLine();
+				ImGui::InputText("###h2", undertitleBuf, sizeof(undertitleBuf));
+				if (ImGui::Button("Apply"))
+				{
+					if (undertitleBuf[0] != ' '&& undertitleBuf[0] != '\0')
+					{
+						AppManager::getInstance().book.chapters[chapterID].h1 = undertitleBuf;
+					}
+				}
+				if (ImGui::Button("Close"))
+				{
+					popupshow = false;
+				}
+
+
+				ImGui::End();
+			}
+		}
 	};
 }

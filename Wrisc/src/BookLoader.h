@@ -80,6 +80,28 @@ public:
 
 		Book b(path, alineaFontSize, h1FontSize, h2FontSize);
 
+		pElement = pRoot->FirstChildElement("title");
+		temp = pElement->FirstChild()->Value();
+		if (temp == nullptr)
+		{
+			//error
+		}
+		b.title= temp;
+
+		pElement = pRoot->FirstChildElement("autor");
+		temp = pElement->FirstChild()->Value();
+		if (temp == nullptr)
+		{
+			//error
+		}
+		b.author = temp;
+		pElement = pRoot->FirstChildElement("publisher");
+		temp = pElement->FirstChild()->Value();
+		if (temp == nullptr)
+		{
+			//error
+		}
+		b.publisher = temp;
 		//loop chapters
 
 		pElement = pRoot->FirstChildElement("chapter");
@@ -130,6 +152,17 @@ public:
 		Element = doc.NewElement("h2Font");
 		Element->SetText(book->settings.h2font.c_str());
 		root->InsertEndChild(Element);
+
+		Element = doc.NewElement("author");
+		Element->SetText(book->author.c_str());
+		root->InsertEndChild(Element);
+		Element = doc.NewElement("title");
+		Element->SetText(book->title.c_str());
+		root->InsertEndChild(Element);
+		Element = doc.NewElement("publisher");
+		Element->SetText(book->publisher.c_str());
+		root->InsertEndChild(Element);
+
 
 
 		for (auto i = 0; i < book->chapters.size(); i++)

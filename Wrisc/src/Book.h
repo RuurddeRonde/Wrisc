@@ -67,6 +67,9 @@ public:
 	}
 
 	bookSettings settings;
+	std::string title;
+	std::string author;
+	std::string publisher;
 	std::vector<Chapter> chapters;
 	int chapterindex;
 private:
