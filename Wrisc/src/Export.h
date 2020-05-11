@@ -1,7 +1,7 @@
 #pragma once
 #include "UIWindow.h"
 #include "imgui.h"
-#include<string>
+#include <string>
 #include "AppManager.h"
 #include <iostream>
 #include <fstream>
